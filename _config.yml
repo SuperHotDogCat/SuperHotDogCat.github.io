@@ -4,12 +4,12 @@
 # ===========================================================
 
 title: "SuperHotDogCat's Blog"
-description: "SuperHotDogCat のポートフォリオ & ブログ"
+description: "SuperHotDogCat's Portfolio & Blog"
 
 # 多言語対応
 #  - 日本語のページはルート (/)、英語のページは /en/ 以下に置く
 #  - UI の文言は _data/i18n.yml
-default_lang: ja
+default_lang: en
 languages: [ja, en]
 
 # GitHub Pages の公開URL
