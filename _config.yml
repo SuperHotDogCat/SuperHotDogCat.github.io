@@ -55,7 +55,7 @@ collections:
 #  - _posts/en/, _projects/en/, en/ 以下は英語 (lang: en) になり、URL に /en が付く
 defaults:
   - scope: { path: "" }
-    values: { layout: page, lang: ja }
+    values: { layout: page, lang: ja, image: "/assets/images/money.jpeg"}
   - scope: { path: "", type: posts }
     values: { layout: post, lang: ja }
   - scope: { path: "", type: projects }
