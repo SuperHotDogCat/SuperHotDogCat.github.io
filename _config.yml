@@ -5,6 +5,7 @@
 
 title: "SuperHotDogCat's Blog"
 description: "SuperHotDogCat's Portfolio & Blog"
+timezone: Asia/Tokyo
 
 # 多言語対応
 #  - 英語のページはルート (/)、日本語のページは /ja/ 以下に置く
