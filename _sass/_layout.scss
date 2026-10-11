@@ -1,0 +1,119 @@
+// ---------- Navbar ----------
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 4rem;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-strong;
+  margin-right: auto;
+  padding: 0.75rem 0;
+  &:hover { text-decoration: none; color: $primary; }
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  display: block;
+  padding: 1.25rem 0.9rem;
+  color: $text;
+  &:hover { color: $primary; text-decoration: none; }
+  &.is-active { color: $primary; font-weight: 500; }
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.75rem;
+  padding-left: 1rem;
+  border-left: 1px solid $border;
+  font-size: 0.85rem;
+  color: $text-light;
+  .lang-item { color: $text; }
+  a.lang-item:hover { color: $primary; text-decoration: none; }
+  .lang-item.is-active { color: $primary; font-weight: 700; }
+}
+
+.nav-toggle { display: none; }
+.nav-burger { display: none; cursor: pointer; font-size: 1.25rem; padding: 0.75rem; }
+
+@media (max-width: $bp-tablet - 1) {
+  .nav-burger { display: block; }
+  .navbar-menu {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+  }
+  .navbar-item { padding: 0.6rem 0.25rem; }
+  .lang-switcher { margin: 0.5rem 0 0; padding: 0.6rem 0.25rem 0; border-left: 0; border-top: 1px solid $border; }
+  .nav-toggle:checked ~ .navbar-menu { display: flex; }
+}
+
+// ---------- 3カラムレイアウト ----------
+// モバイル: 本文 → プロフィール → ウィジェット
+// タブレット: 左 (プロフィール+ウィジェット) / 本文
+// デスクトップ: 左 / 本文 / 右
+.layout {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "main" "left" "right";
+}
+
+.column-main  { grid-area: main; min-width: 0; }
+.column-left  { grid-area: left; min-width: 0; }
+.column-right { grid-area: right; min-width: 0; }
+
+@media (min-width: $bp-tablet) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    grid-template-areas: "left main" "right main";
+    align-items: start;
+  }
+}
+
+@media (min-width: $bp-desktop) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas: "left main right";
+  }
+  .column-left, .column-right { position: sticky; top: 5.5rem; }
+}
+
+.layout-wide {
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-areas: "main" !important;
+  max-width: 960px;
+}
+
+// ---------- Footer ----------
+.footer {
+  background: #fff;
+  padding: 2rem 0;
+  text-align: center;
+  color: $text-light;
+  font-size: 0.875rem;
+  p { margin: 0; }
+}

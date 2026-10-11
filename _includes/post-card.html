@@ -1,0 +1,15 @@
+{%- comment -%} 記事一覧用のカード。include.post を渡す {%- endcomment -%}
+{%- include lang.html -%}
+{%- assign post = include.post -%}
+<article class="card">
+  <div class="card-content">
+    <div class="meta">
+      <span><i class="far fa-calendar"></i> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time></span>
+      {% if post.categories.size > 0 %}<span><i class="far fa-folder"></i> {{ post.categories | join: " / " }}</span>{% endif %}
+      {% include read-time.html text=post.content %}
+    </div>
+    <h2 class="title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <div class="excerpt">{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</div>
+    <a class="button" href="{{ post.url | relative_url }}">{{ t.read_more }}</a>
+  </div>
+</article>

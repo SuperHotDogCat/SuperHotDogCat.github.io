@@ -1,0 +1,31 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: $background;
+  color: $text;
+  font-family: $font-sans;
+  font-size: 15px;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a { color: $primary; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; height: auto; }
+
+code, pre { font-family: $font-mono; font-size: 0.875em; }
+
+.muted { color: $text-light; }
+
+.container {
+  width: 100%;
+  max-width: $container;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

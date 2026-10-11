@@ -1,0 +1,15 @@
+// Rouge のシンタックスハイライト (Atom One Light 風)
+.highlight, pre.highlight { background: #fafafa; color: #383a42; }
+.highlight {
+  .c, .ch, .cd, .cm, .cpf, .c1, .cs { color: #a0a1a7; font-style: italic; }
+  .k, .kc, .kd, .kn, .kp, .kr, .kv { color: #a626a4; }
+  .kt, .nc, .nn { color: #c18401; }
+  .s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss { color: #50a14f; }
+  .m, .mb, .mf, .mh, .mi, .il, .mo { color: #986801; }
+  .nf, .fm, .nb, .bp { color: #4078f2; }
+  .na, .nt, .nv, .vc, .vg, .vi { color: #e45649; }
+  .o, .ow { color: #0184bc; }
+  .err { color: #e45649; }
+  .gd { color: #e45649; }
+  .gi { color: #50a14f; }
+}

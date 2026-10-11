@@ -1,0 +1,95 @@
+# ===========================================================
+#  サイト全体の設定
+#  このファイルを変更した場合は `jekyll serve` を再起動してください
+# ===========================================================
+
+title: "SuperHotDogCat's Blog"
+description: "SuperHotDogCat のポートフォリオ & ブログ"
+
+# 多言語対応
+#  - 日本語のページはルート (/)、英語のページは /en/ 以下に置く
+#  - UI の文言は _data/i18n.yml
+default_lang: ja
+languages: [ja, en]
+
+# GitHub Pages の公開URL
+#  - ユーザーサイト (リポジトリ名が <user>.github.io) の場合: baseurl は ""
+#  - プロジェクトサイト (例: リポジトリ名が dogssr) の場合: baseurl は "/dogssr"
+url: "https://superhotdogcat.github.io"
+baseurl: ""
+
+# プロフィール (左サイドバーとホームページに表示)
+author:
+  name: "SuperHotDogCat"
+  avatar: "/assets/images/money.jpeg"
+  # 言語ごとの自己紹介
+  bio:
+    ja: "ソフトウェアエンジニア / 学生 AIとシステムソフトウェア, 高速化に興味があります。"
+    en: "Software engineer / student interested in AI, systems software, and high-performance computing."
+  location: "Tokyo, Japan"
+  # 使わない項目は削除するかコメントアウトしてください
+  links:
+    - name: GitHub
+      icon: "fab fa-github"
+      url: "https://github.com/SuperHotDogCat"
+    - name: X
+      icon: "fab fa-x-twitter"
+      url: "https://x.com/"
+    - name: LinkedIn
+      icon: "fab fa-linkedin"
+      url: "https://www.linkedin.com/in/junichiro-takahashi-aabb57281/"
+    - name: RSS
+      icon: "fas fa-rss"
+      url: "/feed.xml"
+
+# ブログ記事の URL 形式: /blog/2026/10/11/hello-world/
+permalink: /blog/:year/:month/:day/:title/
+
+# 「作ったもの」コレクション (_projects/ 以下の Markdown)
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# パスごとの既定値 (より具体的なパスが優先される)
+#  - _posts/en/, _projects/en/, en/ 以下は英語 (lang: en) になり、URL に /en が付く
+defaults:
+  - scope: { path: "" }
+    values: { layout: page, lang: ja }
+  - scope: { path: "", type: posts }
+    values: { layout: post, lang: ja }
+  - scope: { path: "", type: projects }
+    values: { layout: project, lang: ja }
+  - scope: { path: "en" }
+    values: { lang: en }
+  - scope: { path: "_posts/en", type: posts }
+    values: { lang: en, permalink: "/en/blog/:year/:month/:day/:title/" }
+  - scope: { path: "_projects/en", type: projects }
+    values: { lang: en, permalink: "/en/projects/:name/" }
+
+# 右サイドバーの「最近の記事」に表示する件数
+recent_posts_count: 5
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+# true にすると全ページで MathJax を読み込みます (ページ単位なら front matter に math: true)
+math: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jemoji
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .jekyll-cache
+  - pages/about.md
+  - en/pages/about.md

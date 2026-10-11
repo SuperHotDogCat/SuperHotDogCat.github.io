@@ -1,0 +1,29 @@
+---
+layout: default
+---
+{%- include lang.html -%}
+<article class="card">
+  <div class="card-content content">
+    {{ content }}
+  </div>
+</article>
+
+<section>
+  <h2 class="section-heading"><i class="fas fa-pen-nib"></i> {{ t.recent_posts }} <a href="{{ lang_prefix | append: '/blog/' | relative_url }}">{{ t.see_all }}</a></h2>
+  {% for post in lang_posts limit: 3 %}
+    {% include post-card.html post=post %}
+  {% else %}
+    <div class="card"><div class="card-content muted">{{ t.no_posts }}</div></div>
+  {% endfor %}
+</section>
+
+<section>
+  <h2 class="section-heading"><i class="fas fa-cube"></i> {{ t.projects_heading }} <a href="{{ lang_prefix | append: '/projects/' | relative_url }}">{{ t.see_all }}</a></h2>
+  {% assign featured = lang_projects | where: "featured", true | sort: "date" | reverse %}
+  {% if featured.size == 0 %}{% assign featured = lang_projects | sort: "date" | reverse %}{% endif %}
+  <div class="project-grid">
+    {% for project in featured limit: 4 %}
+      {% include project-card.html project=project %}
+    {% endfor %}
+  </div>
+</section>

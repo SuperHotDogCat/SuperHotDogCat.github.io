@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+{% feed_meta %}
+{%- for l in site.languages %}{% if l != lang %}
+{%- include translation-url.html to=l -%}
+{%- if translation_exists %}
+<link rel="alternate" hreflang="{{ l }}" href="{{ translation_url | absolute_url }}">
+{%- endif %}{% endif %}{% endfor %}
+<link rel="icon" href="{{ '/assets/images/money.jpeg' | relative_url }}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Ubuntu:wght@400;500;700&family=Source+Code+Pro&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+{% assign math = page.math | default: layout.math | default: site.math %}
+{% if math %}{% include mathjax.html %}{% endif %}

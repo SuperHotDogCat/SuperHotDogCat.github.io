@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{%- include lang.html -%}
+<article class="card">
+  {% if page.image %}<div class="card-image"><img src="{{ page.image | relative_url }}" alt="{{ page.title }}"></div>{% endif %}
+  <div class="card-content content">
+    <div class="meta">
+      {% if page.date %}<span><i class="far fa-calendar"></i> {{ page.date | date: "%Y-%m" }}</span>{% endif %}
+      <span><a href="{{ lang_prefix | append: '/projects/' | relative_url }}"><i class="fas fa-arrow-left"></i> {{ t.all_projects }}</a></span>
+    </div>
+    <h1 class="title page-title">{{ page.title }}</h1>
+    {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+    {% if page.tech %}<div class="tags">{% for tech in page.tech %}<span class="tag">{{ tech }}</span>{% endfor %}</div>{% endif %}
+    <div class="project-links">
+      {% if page.github %}<a class="button" href="{{ page.github }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>{% endif %}
+      {% if page.demo %}<a class="button" href="{{ page.demo }}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Demo</a>{% endif %}
+    </div>
+    {{ content }}
+  </div>
+</article>

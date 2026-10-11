@@ -1,0 +1,20 @@
+{%- comment -%} 作ったもの一覧用のカード。include.project を渡す {%- endcomment -%}
+{%- include lang.html -%}
+{%- assign project = include.project -%}
+<article class="card project-card">
+  {% if project.image %}
+  <a href="{{ project.url | relative_url }}" class="card-image"><img src="{{ project.image | relative_url }}" alt="{{ project.title }}" loading="lazy"></a>
+  {% endif %}
+  <div class="card-content">
+    <h2 class="title"><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
+    {% if project.description %}<p class="excerpt">{{ project.description }}</p>{% endif %}
+    {% if project.tech %}
+    <div class="tags">{% for tech in project.tech %}<span class="tag">{{ tech }}</span>{% endfor %}</div>
+    {% endif %}
+    <div class="project-links">
+      {% if project.github %}<a href="{{ project.github }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>{% endif %}
+      {% if project.demo %}<a href="{{ project.demo }}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Demo</a>{% endif %}
+      <a href="{{ project.url | relative_url }}"><i class="fas fa-book-open"></i> {{ t.details }}</a>
+    </div>
+  </div>
+</article>

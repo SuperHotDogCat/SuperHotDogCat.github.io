@@ -1,0 +1,14 @@
+---
+layout: default
+---
+{%- include lang.html -%}
+<h1 class="section-heading page-heading"><i class="fas fa-cube"></i> {{ t.projects_heading }}</h1>
+{{ content }}
+{% assign projects = lang_projects | sort: "date" | reverse %}
+<div class="project-grid">
+  {% for project in projects %}
+    {% include project-card.html project=project %}
+  {% else %}
+    <div class="card"><div class="card-content muted">{{ t.no_projects }}</div></div>
+  {% endfor %}
+</div>

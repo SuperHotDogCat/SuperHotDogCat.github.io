@@ -1,0 +1,41 @@
+{%- include lang.html -%}
+{%- assign archives_url = lang_prefix | append: '/archives/' | relative_url -%}
+<div class="card widget">
+  <h3 class="menu-label">{{ t.recent_posts }}</h3>
+  {% assign n = site.recent_posts_count | default: 5 %}
+  {% for post in lang_posts limit: n %}
+  <article class="recent-post">
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+  </article>
+  {% else %}
+  <p class="muted">{{ t.no_posts }}</p>
+  {% endfor %}
+</div>
+
+{% assign cat_names = lang_posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+{% if cat_names.size > 0 %}
+<div class="card widget">
+  <h3 class="menu-label">{{ t.categories }}</h3>
+  <ul class="menu-list">
+    {% for cat in cat_names %}
+    {% assign cat_posts = lang_posts | where_exp: "p", "p.categories contains cat" %}
+    <li><a href="{{ archives_url }}#category-{{ cat | slugify }}">
+      <span>{{ cat }}</span><span class="tag">{{ cat_posts | size }}</span></a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% assign tag_names = lang_posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+{% if tag_names.size > 0 %}
+<div class="card widget">
+  <h3 class="menu-label">{{ t.tags }}</h3>
+  <div class="tags">
+    {% for tag in tag_names %}
+    {% assign tag_posts = lang_posts | where_exp: "p", "p.tags contains tag" %}
+    <a class="tag" href="{{ archives_url }}#tag-{{ tag | slugify }}">{{ tag }} <span>{{ tag_posts | size }}</span></a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

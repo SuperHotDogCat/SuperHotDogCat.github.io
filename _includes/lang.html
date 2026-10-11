@@ -1,0 +1,13 @@
+{%- comment -%}
+  現在のページの言語に関する変数をセットする。各レイアウト・include の先頭で include する。
+    lang          : ページの言語 (ja / en)
+    t             : UI 文言 (_data/i18n.yml)
+    lang_prefix   : URL の先頭 ("" / "/en")
+    lang_posts    : この言語の記事 (新しい順)
+    lang_projects : この言語の作ったもの
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign lang_prefix = t.prefix -%}
+{%- assign lang_posts = site.posts | where: "lang", lang -%}
+{%- assign lang_projects = site.projects | where: "lang", lang -%}

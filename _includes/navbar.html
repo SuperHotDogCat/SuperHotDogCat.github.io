@@ -1,0 +1,39 @@
+{%- comment -%}
+  ナビゲーションは front matter に nav_order を持つ「同じ言語の」ページから自動生成されます。
+  ページを追加する方法は README.md を参照してください。
+{%- endcomment -%}
+{%- include lang.html -%}
+{%- assign nav_pages = site.pages | where: "lang", lang | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" -%}
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a class="navbar-brand" href="{{ lang_prefix | append: '/' | relative_url }}">{{ site.title }}</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="{{ t.menu }}">
+    <label for="nav-toggle" class="nav-burger"><i class="fas fa-bars"></i></label>
+    <ul class="navbar-menu">
+      {%- for p in nav_pages -%}
+        {%- assign active = false -%}
+        {%- if p.layout == 'home' -%}
+          {%- if page.url == p.url -%}{%- assign active = true -%}{%- endif -%}
+        {%- else -%}
+          {%- assign url_head = page.url | slice: 0, p.url.size -%}
+          {%- if url_head == p.url -%}{%- assign active = true -%}{%- endif -%}
+          {%- if p.layout == 'blog' and page.collection == 'posts' -%}{%- assign active = true -%}{%- endif -%}
+          {%- if p.layout == 'projects' and page.collection == 'projects' -%}{%- assign active = true -%}{%- endif -%}
+        {%- endif -%}
+      <li><a class="navbar-item{% if active %} is-active{% endif %}" href="{{ p.url | relative_url }}">{{ p.nav_title | default: p.title }}</a></li>
+      {%- endfor -%}
+      <li class="lang-switcher">
+        <i class="fas fa-globe"></i>
+        {%- for l in site.languages -%}
+          {%- if l == lang -%}
+          <span class="lang-item is-active">{{ site.data.i18n[l].short }}</span>
+          {%- else -%}
+          {%- include translation-url.html to=l -%}
+          <a class="lang-item" href="{{ translation_url | relative_url }}" hreflang="{{ l }}" title="{{ site.data.i18n[l].label }}">{{ site.data.i18n[l].short }}</a>
+          {%- endif -%}
+          {%- unless forloop.last %}<span class="lang-sep">/</span>{% endunless -%}
+        {%- endfor -%}
+      </li>
+    </ul>
+  </div>
+</nav>

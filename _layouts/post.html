@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{%- include lang.html -%}
+{%- comment -%} 前後の記事は同じ言語の記事から探す (lang_posts は新しい順) {%- endcomment -%}
+{%- for p in lang_posts -%}
+  {%- if p.url == page.url -%}
+    {%- assign newer_index = forloop.index0 | minus: 1 -%}
+    {%- assign older_index = forloop.index0 | plus: 1 -%}
+    {%- if newer_index >= 0 -%}{%- assign newer_post = lang_posts[newer_index] -%}{%- endif -%}
+    {%- assign older_post = lang_posts[older_index] -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign archives_url = lang_prefix | append: '/archives/' | relative_url -%}
+<article class="card">
+  {% if page.image %}<div class="card-image"><img src="{{ page.image | relative_url }}" alt="{{ page.title }}"></div>{% endif %}
+  <div class="card-content content">
+    <div class="meta">
+      <span><i class="far fa-calendar"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time></span>
+      {% if page.last_modified_at %}<span><i class="fas fa-pen"></i> {{ t.updated }} {{ page.last_modified_at | date: "%Y-%m-%d" }}</span>{% endif %}
+      {% if page.categories.size > 0 %}<span><i class="far fa-folder"></i>
+        {% for c in page.categories %}<a href="{{ archives_url }}#category-{{ c | slugify }}">{{ c }}</a>{% unless forloop.last %} / {% endunless %}{% endfor %}</span>{% endif %}
+      {% include read-time.html text=content %}
+    </div>
+    <h1 class="title page-title">{{ page.title }}</h1>
+    {{ content }}
+    {% if page.tags.size > 0 %}
+    <div class="tags post-tags">
+      {% for tag in page.tags %}<a class="tag" href="{{ archives_url }}#tag-{{ tag | slugify }}">#{{ tag }}</a>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</article>
+
+{% if older_post or newer_post %}
+<nav class="card post-navigation">
+  <div class="card-content">
+    {% if older_post %}<a class="prev" href="{{ older_post.url | relative_url }}"><i class="fas fa-chevron-left"></i> {{ older_post.title }}</a>{% else %}<span></span>{% endif %}
+    {% if newer_post %}<a class="next" href="{{ newer_post.url | relative_url }}">{{ newer_post.title }} <i class="fas fa-chevron-right"></i></a>{% endif %}
+  </div>
+</nav>
+{% endif %}

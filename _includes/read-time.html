@@ -1,0 +1,8 @@
+{%- comment -%} include.text の読了時間 (日本語: 500字/分, 英語: 200語/分) {%- endcomment -%}
+{%- assign plain = include.text | strip_html -%}
+{%- if lang == 'ja' -%}
+  {%- assign minutes = plain | size | divided_by: 500 | plus: 1 -%}
+{%- else -%}
+  {%- assign minutes = plain | number_of_words | divided_by: 200 | plus: 1 -%}
+{%- endif -%}
+<span><i class="far fa-clock"></i> {{ t.read_time_before }}{{ minutes }}{{ t.read_time_after }}</span>

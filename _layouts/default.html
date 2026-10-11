@@ -1,0 +1,24 @@
+{%- include lang.html -%}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  {% include navbar.html %}
+
+  {% if page.sidebar == false %}
+  <main class="container layout layout-wide">
+    <div class="column-main">{{ content }}</div>
+  </main>
+  {% else %}
+  <main class="container layout">
+    <div class="column-main">{{ content }}</div>
+    <aside class="column-left">{% include profile.html %}</aside>
+    <aside class="column-right">{% include widgets.html %}</aside>
+  </main>
+  {% endif %}
+
+  {% include footer.html %}
+</body>
+</html>

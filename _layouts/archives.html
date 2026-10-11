@@ -1,0 +1,43 @@
+---
+layout: page
+---
+{%- include lang.html -%}
+{{ content }}
+<h2 id="years">{{ t.by_year }}</h2>
+{% assign by_year = lang_posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+{% for year in by_year %}
+<h3 id="year-{{ year.name }}">{{ year.name }} <small>({{ year.items | size }})</small></h3>
+<ul class="archive-list">
+  {% for post in year.items %}
+  <li><time>{{ post.date | date: "%m-%d" }}</time> <a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endfor %}
+
+{% assign cat_names = lang_posts | map: "categories" | join: "," | split: "," | uniq | sort %}
+{% if cat_names.size > 0 %}
+<h2 id="categories">{{ t.by_category }}</h2>
+{% for cat in cat_names %}
+<h3 id="category-{{ cat | slugify }}">{{ cat }}</h3>
+<ul class="archive-list">
+  {% assign cat_posts = lang_posts | where_exp: "p", "p.categories contains cat" %}
+  {% for post in cat_posts %}
+  <li><time>{{ post.date | date: "%Y-%m-%d" }}</time> <a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endif %}
+
+{% assign tag_names = lang_posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+{% if tag_names.size > 0 %}
+<h2 id="tags">{{ t.by_tag }}</h2>
+{% for tag in tag_names %}
+<h3 id="tag-{{ tag | slugify }}">#{{ tag }}</h3>
+<ul class="archive-list">
+  {% assign tag_posts = lang_posts | where_exp: "p", "p.tags contains tag" %}
+  {% for post in tag_posts %}
+  <li><time>{{ post.date | date: "%Y-%m-%d" }}</time> <a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endif %}

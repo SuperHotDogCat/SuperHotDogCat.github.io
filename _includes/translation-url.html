@@ -1,0 +1,19 @@
+{%- comment -%}
+  include.to の言語版の URL を translation_url にセットする。
+  URL の言語プレフィックスを付け替えたページが存在すればそれを、なければその言語のホームを返す。
+  例: /blog/2026/10/11/hello-world/  <->  /en/blog/2026/10/11/hello-world/
+  translation_exists に翻訳が存在するかをセットする。
+{%- endcomment -%}
+{%- assign cur_prefix = site.data.i18n[lang].prefix -%}
+{%- assign to_prefix = site.data.i18n[include.to].prefix -%}
+{%- assign base_url = page.url -%}
+{%- if cur_prefix != "" -%}{%- assign base_url = page.url | remove_first: cur_prefix -%}{%- endif -%}
+{%- assign translation_url = to_prefix | append: base_url -%}
+{%- assign found = site.pages | where: "url", translation_url | first -%}
+{%- unless found -%}{%- assign found = site.documents | where: "url", translation_url | first -%}{%- endunless -%}
+{%- if found -%}
+  {%- assign translation_exists = true -%}
+{%- else -%}
+  {%- assign translation_exists = false -%}
+  {%- assign translation_url = to_prefix | append: "/" -%}
+{%- endif -%}

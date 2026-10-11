@@ -1,0 +1,35 @@
+{%- include lang.html -%}
+{%- assign bio = site.author.bio[lang] | default: site.author.bio -%}
+{%- assign tag_count = lang_posts | map: "tags" | join: "," | split: "," | uniq | size -%}
+<div class="card widget profile">
+  <img class="avatar" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}">
+  <p class="profile-name">{{ site.author.name }}</p>
+  {% if bio %}<p class="profile-bio">{{ bio }}</p>{% endif %}
+  {% if site.author.location %}
+  <p class="profile-location"><i class="fas fa-map-marker-alt"></i> {{ site.author.location }}</p>
+  {% endif %}
+  <nav class="level">
+    <div class="level-item">
+      <p class="heading">{{ t.posts }}</p>
+      <a class="title" href="{{ lang_prefix | append: '/blog/' | relative_url }}">{{ lang_posts | size }}</a>
+    </div>
+    <div class="level-item">
+      <p class="heading">{{ t.projects }}</p>
+      <a class="title" href="{{ lang_prefix | append: '/projects/' | relative_url }}">{{ lang_projects | size }}</a>
+    </div>
+    <div class="level-item">
+      <p class="heading">{{ t.tags }}</p>
+      <a class="title" href="{{ lang_prefix | append: '/archives/' | relative_url }}#tags">{{ tag_count }}</a>
+    </div>
+  </nav>
+  {% if site.author.links %}
+  <div class="profile-links">
+    {% for link in site.author.links %}
+    {%- assign href = link.url -%}
+    {%- assign first = href | slice: 0 -%}
+    {%- if first == '/' -%}{%- assign href = href | relative_url -%}{%- endif -%}
+    <a href="{{ href }}" title="{{ link.name }}" target="_blank" rel="noopener"><i class="{{ link.icon }}"></i></a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
