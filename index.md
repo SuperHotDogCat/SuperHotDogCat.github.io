@@ -6,18 +6,18 @@ nav_order: 1
 
 ## Who am I
 
-**SuperHotDogCat**と名乗るパソコンお兄さん(30歳まではこう名乗らせてほしい), 今は学生をやっているがもう少ししたら社会に出荷される予定。基本的にコンピューターに関連するものならなんでもやる。
+A computer guy who goes by **SuperHotDogCat** (please let me keep calling myself that until I'm 30). I'm a student right now, but I'm due to be shipped out into the working world before long. Basically, I'll do anything as long as it involves computers.
 
 ## Interests
 
-- 機械学習 / 深層学習
-- 高性能計算・並列処理
-- 関数型プログラミング(特に, Functional Programming in Scalaを読むこと)
-- ポーカー🃏/オセロ⚪️⚫️/麻雀🀄️
+- Machine learning / deep learning
+- High performance computing and parallel processing
+- Functional programming (especially reading *Functional Programming in Scala*)
+- Poker🃏 / Othello⚪️⚫️ / Mahjong🀄️
 
 ## Education
-- 2025-2027 東京大学情報理工学系研究科創造情報学専攻
-- 2021-2025 東京大学工学部電子情報工学科
+- 2025-2027 Department of Creative Informatics, Graduate School of Information Science and Technology, The University of Tokyo
+- 2021-2025 Department of Electrical and Electronic Engineering and Information Systems (EEIC), Faculty of Engineering, The University of Tokyo
 
 ## Contact
 

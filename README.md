@@ -10,15 +10,15 @@ GitHub Pages は Jekyll に対応しているため、**Markdown ファイルを
 ```
 .
 ├── _config.yml          # サイト全体の設定 (タイトル・プロフィール・URL など)
-├── index.md             # ホームページ (Home)
+├── index.md             # ホームページ (Home, 英語)
 ├── blog/index.html      # ブログ一覧ページ (Blog)
 ├── projects/index.html  # 作ったもの一覧ページ (Projects)
 ├── pages/               # 追加ページ (Archives, About など) ← ここにページを追加
-├── _posts/              # ブログ記事 (Markdown)
-│   └── en/              #   英語の記事
-├── _projects/           # 作ったもの (Markdown)
-│   └── en/              #   英語版
-├── en/                  # 英語のページ (日本語版と同じ構成: index.md, blog/, projects/, pages/)
+├── _posts/              # ブログ記事 (Markdown, 英語)
+│   └── ja/              #   日本語の記事
+├── _projects/           # 作ったもの (Markdown, 英語)
+│   └── ja/              #   日本語版
+├── ja/                  # 日本語のページ (英語版と同じ構成: index.md, blog/, projects/, pages/)
 ├── _data/i18n.yml       # ナビバーや見出しなど UI の文言 (日本語 / 英語)
 ├── _layouts/            # ページのレイアウト (HTML テンプレート)
 ├── _includes/           # ナビバー・サイドバーなどの部品
@@ -108,7 +108,7 @@ nav_order: 4
 ```
 
 現在の並び順は Home (1), Blog (2), Projects (3), Archives (4), About (5) です。
-英語版のナビバーには `en/` 以下のページが表示されるので、英語ページも追加する場合は `en/pages/` に同様に作成します (下記「日本語 / 英語の切り替え」参照)。
+日本語版のナビバーには `ja/` 以下のページが表示されるので、日本語ページも追加する場合は `ja/pages/` に同様に作成します (下記「日本語 / 英語の切り替え」参照)。
 
 | front matter | 説明 |
 | --- | --- |
@@ -124,19 +124,19 @@ nav_order: 4
 
 ### 日本語 / 英語の切り替え
 
-日本語のページはルート (`/`)、英語のページは `/en/` 以下で公開され、ナビバー右端の **JA / EN** で切り替えられます。
-英語版は日本語版と同じ名前・同じ構成のファイルを英語用の場所に置くだけで、自動で対応付けられます。
+英語のページはルート (`/`)、日本語のページは `/ja/` 以下で公開され、ナビバー右端の **EN / JA** で切り替えられます。
+日本語版は英語版と同じ名前・同じ構成のファイルを日本語用の場所に置くだけで、自動で対応付けられます。
 
-| 種類 | 日本語 | 英語 |
+| 種類 | 英語 | 日本語 |
 | --- | --- | --- |
-| ホーム | `index.md` | `en/index.md` |
-| ブログ記事 | `_posts/2026-10-11-hello-world.md` | `_posts/en/2026-10-11-hello-world.md` (日付・ファイル名を揃える) |
-| 作ったもの | `_projects/foo.md` | `_projects/en/foo.md` |
-| 追加ページ | `pages/foo.md` (`permalink: /foo/`) | `en/pages/foo.md` (`permalink: /en/foo/`) |
+| ホーム | `index.md` | `ja/index.md` |
+| ブログ記事 | `_posts/2026-10-11-hello-world.md` | `_posts/ja/2026-10-11-hello-world.md` (日付・ファイル名を揃える) |
+| 作ったもの | `_projects/foo.md` | `_projects/ja/foo.md` |
+| 追加ページ | `pages/foo.md` (`permalink: /foo/`) | `ja/pages/foo.md` (`permalink: /ja/foo/`) |
 
-- 切り替えボタンは「URL の先頭に `/en` を付けた (外した) ページ」へリンクします。翻訳がないページでは、その言語のホームへ移動します。
+- 切り替えボタンは「URL の先頭に `/ja` を付けた (外した) ページ」へリンクします。翻訳がないページでは、その言語のホームへ移動します。
 - 一覧・サイドバー・ナビバーには、表示中の言語の記事・ページだけが出ます。片方の言語だけで書いた記事も問題ありません。
-- `_posts/en/`・`_projects/en/`・`en/` 以下のファイルは自動で `lang: en` になります (設定は `_config.yml` の `defaults`)。
+- `_posts/ja/`・`_projects/ja/`・`ja/` 以下のファイルは自動で `lang: ja` になります (それ以外は `lang: en`) (設定は `_config.yml` の `defaults`)。
 - プロフィールの自己紹介は `_config.yml` の `author.bio` に言語ごとに書きます。
 - 「続きを読む」などの UI の文言は `_data/i18n.yml` で変更できます。
 

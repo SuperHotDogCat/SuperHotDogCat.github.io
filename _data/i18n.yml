@@ -3,7 +3,7 @@
 ja:
   label: "日本語"
   short: "JA"
-  prefix: ""            # この言語のページの URL の先頭 (日本語はルート)
+  prefix: "/ja"         # この言語のページの URL の先頭
   locale: ja_JP
   recent_posts: "最近の記事"
   see_all: "すべて見る →"
@@ -29,7 +29,7 @@ ja:
 en:
   label: "English"
   short: "EN"
-  prefix: "/en"
+  prefix: ""            # 英語はルート
   locale: en_US
   recent_posts: "Recent Posts"
   see_all: "See all →"

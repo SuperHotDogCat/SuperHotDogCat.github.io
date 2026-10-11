@@ -7,10 +7,10 @@ title: "SuperHotDogCat's Blog"
 description: "SuperHotDogCat's Portfolio & Blog"
 
 # 多言語対応
-#  - 日本語のページはルート (/)、英語のページは /en/ 以下に置く
+#  - 英語のページはルート (/)、日本語のページは /ja/ 以下に置く
 #  - UI の文言は _data/i18n.yml
 default_lang: en
-languages: [ja, en]
+languages: [en, ja]
 
 # GitHub Pages の公開URL
 #  - ユーザーサイト (リポジトリ名が <user>.github.io) の場合: baseurl は ""
@@ -34,7 +34,7 @@ author:
       url: "https://github.com/SuperHotDogCat"
     - name: X
       icon: "fab fa-x-twitter"
-      url: "https://x.com/"
+      url: "https://x.com/Takanas0517"
     - name: LinkedIn
       icon: "fab fa-linkedin"
       url: "https://www.linkedin.com/in/junichiro-takahashi-aabb57281/"
@@ -42,7 +42,7 @@ author:
       icon: "fas fa-rss"
       url: "/feed.xml"
 
-# ブログ記事の URL 形式: /blog/2026/10/11/hello-world/
+# ブログ記事の URL 形式: /blog/2026/10/11/hello-world/ (日本語は /ja/blog/...)
 permalink: /blog/:year/:month/:day/:title/
 
 # 「作ったもの」コレクション (_projects/ 以下の Markdown)
@@ -52,20 +52,20 @@ collections:
     permalink: /projects/:name/
 
 # パスごとの既定値 (より具体的なパスが優先される)
-#  - _posts/en/, _projects/en/, en/ 以下は英語 (lang: en) になり、URL に /en が付く
+#  - _posts/ja/, _projects/ja/, ja/ 以下は日本語 (lang: ja) になり、URL に /ja が付く
 defaults:
   - scope: { path: "" }
-    values: { layout: page, lang: ja, image: "/assets/images/money.jpeg"}
+    values: { layout: page, lang: en }
   - scope: { path: "", type: posts }
-    values: { layout: post, lang: ja }
+    values: { layout: post, lang: en }
   - scope: { path: "", type: projects }
-    values: { layout: project, lang: ja }
-  - scope: { path: "en" }
-    values: { lang: en }
-  - scope: { path: "_posts/en", type: posts }
-    values: { lang: en, permalink: "/en/blog/:year/:month/:day/:title/" }
-  - scope: { path: "_projects/en", type: projects }
-    values: { lang: en, permalink: "/en/projects/:name/" }
+    values: { layout: project, lang: en }
+  - scope: { path: "ja" }
+    values: { lang: ja }
+  - scope: { path: "_posts/ja", type: posts }
+    values: { lang: ja, permalink: "/ja/blog/:year/:month/:day/:title/" }
+  - scope: { path: "_projects/ja", type: projects }
+    values: { lang: ja, permalink: "/ja/projects/:name/" }
 
 # 右サイドバーの「最近の記事」に表示する件数
 recent_posts_count: 5
@@ -92,4 +92,4 @@ exclude:
   - .bundle
   - .jekyll-cache
   - pages/about.md
-  - en/pages/about.md
+  - ja/pages/about.md

@@ -4,12 +4,12 @@ permalink: /about/
 nav_order: 5
 ---
 
-このページは **ページ追加のサンプル** です。
+This page is a **sample of an additional page**.
 
-`pages/` (英語は `en/pages/`) に Markdown ファイルを置き、front matter に `title`・`permalink`・`nav_order` を書くだけで、
-ナビゲーションバーに自動でリンクが追加されます。詳しくは README.md を参照してください。
+Put a Markdown file in `pages/` (Japanese: `ja/pages/`) with `title`, `permalink` and `nav_order` in its front matter,
+and a link is added to the navigation bar automatically. See README.md for details.
 
-## このサイトについて
+## About this site
 
-- [Jekyll](https://jekyllrb.com/) + GitHub Pages で生成しています
-- デザインは [Lei Mao's Log Book](https://leimao.github.io/) を参考にしています
+- Generated with [Jekyll](https://jekyllrb.com/) and hosted on GitHub Pages
+- The design is inspired by [Lei Mao's Log Book](https://leimao.github.io/)
