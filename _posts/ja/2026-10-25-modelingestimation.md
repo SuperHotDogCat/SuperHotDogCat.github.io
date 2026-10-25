@@ -102,7 +102,7 @@ $$
 T_{\text{step}} \ge \frac{\text{重みのbyte数}}{W}
 $$
 
-が成り立ちます。ここでMoEの場合, batch size 1なら読むのはactiveな重みだけです。Qwen3-30B-A3Bのactive parameterは約3.3Bなので $6.6\,\text{GB} / 4.0\,\text{TB/s} \approx 1.65\,\text{ms}$ となり, 方法1の1.62 msとほぼ同じ値がたった1行の計算で出てきます。一方でbatch sizeが大きくなるとtokenごとに違うexpertが選ばれるため, 読むexpertの数は増えていき, 最終的には全parameter(約30.5B, 61 GB)を読む $61\,\text{GB} / 4.0\,\text{TB/s} \approx 15\,\text{ms}$ に近づいていきます。Prefillでも多くのtokenが全expertに振り分けられるため, 読む重みの量としてはこちらに近くなります。ただしprefillは1度に多くのtokenを処理するので算術強度が高く, 多くの場合は計算律速になります。そのためprefillの時間は重みを読む時間ではなく $F/P$ の方で見積もる必要があります。
+が成り立ちます。ここでMoEの場合, batch size 1なら読むのはactiveな重みだけです。Qwen3-30B-A3Bのactive parameterは約3.3Bなので $6.6\,\text{GB} / 4.0\,\text{TB/s} \approx 1.65\,\text{ms}$ となり, 方法1の1.62 msとほぼ同じ値がたった1行の計算で出てきます。一方でbatch sizeが大きくなるとtokenごとに違うexpertが選ばれるため, 読むexpertの数は増えていき, 最終的には全parameter(約30.5B, 61 GB)を読む $61\,\text{GB} / 4.0\,\text{TB/s} \approx 15\,\text{ms}$ に近づいていきます。Prefillでも多くのtokenが全expertに振り分けられるため, 読む重みの量としてはこちらに近くなります。ただしprefillは1度に多くのtokenを処理するので算術強度が高く, 計算律速になりえます。
 
 ## 1T parameter級のDense modelは重い
 この見積もりを1T parameterのDense modelに当てはめてみます。BF16なら重みだけで2 TBです。

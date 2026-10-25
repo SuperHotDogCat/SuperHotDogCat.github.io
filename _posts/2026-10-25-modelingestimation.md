@@ -100,7 +100,7 @@ $$
 T_{\text{step}} \ge \frac{\text{bytes of weights}}{W}
 $$
 
-For MoE at batch size 1, you only read the active weights. Qwen3-30B-A3B has about 3.3B active parameters, so $6.6\,\text{GB} / 4.0\,\text{TB/s} \approx 1.65\,\text{ms}$, almost the same as the 1.62 ms from Method 1, from a single line of arithmetic. As the batch size grows, different tokens pick different experts, so you read more and more experts, and the time approaches $61\,\text{GB} / 4.0\,\text{TB/s} \approx 15\,\text{ms}$ for reading all parameters (about 30.5B, 61 GB). In prefill, too, many tokens are spread across all experts, so the amount of weights read is close to this number. Prefill, however, processes many tokens at once, so its arithmetic intensity is high and it is usually compute bound. You therefore need to estimate prefill time with $F/P$, not with the time to read the weights.
+For MoE at batch size 1, you only read the active weights. Qwen3-30B-A3B has about 3.3B active parameters, so $6.6\,\text{GB} / 4.0\,\text{TB/s} \approx 1.65\,\text{ms}$, almost the same as the 1.62 ms from Method 1, from a single line of arithmetic. As the batch size grows, different tokens pick different experts, so you read more and more experts, and the time approaches $61\,\text{GB} / 4.0\,\text{TB/s} \approx 15\,\text{ms}$ for reading all parameters (about 30.5B, 61 GB). In prefill, too, many tokens are spread across all experts, so the amount of weights read is close to this number. Prefill, however, processes many tokens at once, so its arithmetic intensity is high and it can become compute bound.
 
 ## A 1T-parameter dense model is heavy
 Let's apply this estimate to a 1T-parameter dense model. In BF16, the weights alone are 2 TB.
