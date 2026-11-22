@@ -492,6 +492,8 @@ void *memcpy_simd_inline(void* dst, const void* src, size_t n){
 
 `ldp` (load pair) loads two `q` registers, 32 bytes, in one instruction, and `stp` (store pair) is its store counterpart. It loads 128 bytes into the 8 registers `q0` to `q7` and then writes them all out. `[s] "r" (s)` puts `s` in a register so it can be referred to as `%[s]`, and the last line tells the compiler that the code modifies `v0` to `v7` (the same registers as `q0` to `q7`) and memory.
 
+A note: `ldp`/`stp` aren't SIMD-only instructions. They're ordinary AArch64 load/store instructions that also work with general-purpose registers, as in `ldp x0, x1, [x8]`. Here they target `q` registers (NEON's 128-bit registers), so each register carries 16 bytes. They don't do data-parallel computation, like `add v0.16b, ...` computing 16 elements at once. Since `memcpy` doesn't compute anything, the only benefit we get from SIMD here is moving more bytes per instruction. The `vld1q_u8`/`vst1q_u8` in section 6 also turn into `ldr q0`/`str q0` in the assembly, which are the same kind of instruction.
+
 In the assembly, the instructions I wrote appear exactly as written.
 
 ```nasm
@@ -551,7 +553,7 @@ LBB3_7:                                 ; =>This Inner Loop Header: Depth=1
 	b.ne	LBB3_7
 ```
 
-The compiler rewrote the byte-by-byte loop into a SIMD loop using `ldp`/`stp`. It did the loop unrolling, the SIMD conversion and the register allocation all by itself. For something as simple as `memcpy`, `-O3` is enough for everything in this post.
+The compiler rewrote the byte-by-byte loop into a loop using `q` registers and `ldp`/`stp`. It did the loop unrolling, the SIMD conversion and the register allocation all by itself. For something as simple as `memcpy`, `-O3` is enough for everything in this post.
 
 Even so, real optimization work often doesn't go this smoothly. The compiler may give up on SIMD because it's worried about pointer aliasing, or it may not use registers the way you want. When that happens, the only way to find out why your code isn't getting faster is to read the assembly, as we did here. And as we saw when switching to SIMD alone made things slower, **you can't know which change helps until you measure**. So add changes one at a time, measure every time, and when the result differs from what you expected, read the assembly to isolate the cause.
 
